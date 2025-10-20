@@ -10,7 +10,7 @@ on:
 # Environment Variables (für alle Jobs)
 env:
   NODE_VERSION: '18'
-  GCP_PROJECT_ID: 'your-project-id'
+  GCP_PROJECT_ID: 'cicd-demo-project-475717'
   GCP_REGION: 'europe-west3'
   SERVICE_NAME: 'cicd-demo-app'
 
