@@ -11,7 +11,8 @@ env:
   GCP_PROJECT_ID: 'cicd-demo-project-475717'
   GCP_REGION: 'europe-west3'
   SERVICE_NAME: 'cicd-demo-app'
-  IMAGE_TAG: 'gcr.io/cicd-demo-project-475717/cicd-demo-app:${{ github.sha }}'
+  IMAGE_TAG: 'europe-west3-docker.pkg.dev/cicd-demo-project-475717/cicd-demo-app/cicd-demo-app:${{ github.sha }}'
+
 
 jobs:
   test:
