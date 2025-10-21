@@ -56,14 +56,20 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v1
-        with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
-      
-      - name: Set up Cloud SDK
+      - name: Authenticate & set up gcloud
         uses: google-github-actions/setup-gcloud@v1
-      
+        with:
+          project_id: ${{ env.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      - name: Verify gcloud authentication
+        run: |
+          echo "Active account:"
+          gcloud auth list --filter=status:ACTIVE --format="value(account)"
+          echo "Configured project:"
+          gcloud config list project --format="value(core.project)"
+
       - name: Configure Docker for Artifact Registry
         run: gcloud auth configure-docker europe-west3-docker.pkg.dev --quiet
       
@@ -86,13 +92,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v1
-        with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
-      
-      - name: Set up Cloud SDK
+      - name: Authenticate & set up gcloud
         uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ env.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      - name: Verify gcloud authentication
+        run: |
+          echo "Active account:"
+          gcloud auth list --filter=status:ACTIVE --format="value(account)"
+          echo "Configured project:"
+          gcloud config list project --format="value(core.project")"
       
       - name: Configure Docker for Artifact Registry
         run: gcloud auth configure-docker europe-west3-docker.pkg.dev --quiet
